@@ -1,0 +1,577 @@
+/* General styles */
+body {
+    font-family: 'Gaegu', cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url(https://i.pinimg.com/originals/9e/78/85/9e7885991c634c1ac881e3ec0c0da1dd.png);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #f5f5f5;
+}
+
+/* Remaining CSS (unchanged) */
+.container {
+    text-align: center;
+    max-width: 90%;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+h1 {
+    color: #ff9900;
+    font-size: 2.5em;
+    margin: 0 0 10px 0;
+}
+
+#kitty-coin {
+    width: 250px;
+    height: 250px;
+    background-image: url('https://i.pinimg.com/originals/fb/1c/cf/fb1ccfddfb18c0fbf2d3ce09809e5414.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin: 20px auto;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    animation: float 5s ease-in-out infinite;
+    position: relative;
+}
+
+/* Animation for floating effect */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+/* Animation for zoom effect */
+@keyframes zoom {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2); /* Adjusted scale for less zoom */
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#kitty-coin.zoomed {
+    animation: zoom 0.5s forwards; /* Apply the zoom animation */
+}
+
+#energy-bar-container {
+    width: 100%;
+    max-width: 250px;
+    height: 30px;
+    margin: 10px auto;
+    border-radius: 15px;
+    background-color: #ddd; /* Колір фону */
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Глибока тінь для 3D ефекту */
+}
+
+#energy-bar-background {
+    height: 100%;
+    width: 100%;
+    background: #aaa; /* Колір фону, що показує зменшену енергію */
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); /* Внутрішня тінь для контурного ефекту */
+}
+
+#energy-bar {
+    height: 100%;
+    width: 0%; /* Заповнюється в залежності від рівня енергії */
+    background: linear-gradient(90deg, #ffcc00, #ff9900); /* Градієнтний фон для частково заповненої енергії */
+    background-size: 200% 200%; /* Розмір градієнту для анімації */
+    animation: gradientShift 3s ease infinite; /* Анімація градієнту */
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-radius: 15px;
+    transition: width 0.5s;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); /* Внутрішня тінь для контурного ефекту */
+}
+
+/* Анімація градієнту */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+#energy-label {
+    position: relative;
+    margin-top: 5px;
+}
+
+#energy-text {
+    font-size: 1em;
+    color: #fff;
+    font-weight: bold;
+}
+
+p {
+    font-size: 1.2em;
+    color: #000;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+#coins-text {
+    color: #fff;
+}
+
+/* Bottom Menu */
+.bottom-menu {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(0, 0, 0, 0.0); /* Semi-transparent background */
+    padding: 10px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.bottom-menu button {
+    background: linear-gradient(90deg, #ffcc00, #ff9900); /* Gradient background */
+    color: #fff; /* Text color */
+    border: none;
+    border-radius: 50%; /* Fully rounded corners for circular buttons */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Added transition for transform and shadow */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* Deeper shadow for 3D effect */
+    width: 70px; /* Set the width to make buttons circular */
+    height: 70px; /* Set the height to make buttons circular */
+    padding: 0; /* Remove padding to prevent overflow */
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg); /* Add perspective for 3D effect */
+    position: relative; /* For 3D shadow */
+}
+
+.bottom-menu button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3); /* Inner shadow for 3D effect */
+    z-index: -1;
+    transform: scale(0.9); /* Slightly smaller to create a 3D effect */
+}
+
+.bottom-menu button i {
+    font-size: 1.5em; /* Adjust icon size */
+    margin-bottom: 0px; /* Space between icon and text */
+}
+
+.bottom-menu button span {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.bottom-menu button:hover {
+    background: linear-gradient(90deg, #ff9900, #ffcc00); /* Inverted gradient on hover */
+    transform: scale(1.1) rotateX(0deg) rotateY(0deg); /* Increase size and maintain 3D effect */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6); /* Deeper shadow on hover */
+}
+
+.bottom-menu button:active {
+    transform: scale(1.05) rotateX(0deg) rotateY(0deg); /* Slightly smaller size when clicked with 3D effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Slightly less shadow on click */
+}
+
+/* Modal Styles */
+.modal-section {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+/* Centering modal content */
+.modal-content {
+    background-image: url('https://i.pinimg.com/originals/7f/38/be/7f38be522268230870f542c776726a1d.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: #fff;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 15px;
+}
+
+/* Close button */
+.close {
+    color: #fff;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #ba55d3;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Roulette Styles */
+#roulette-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Center vertically */
+    padding: 20px;
+}
+
+#roulette-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%; /* Make the roulette circular */
+}
+
+#roulette {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%; /* Make the roulette circular */
+    background-image: url('https://i.pinimg.com/originals/35/49/10/3549102105cc0dba52619c09038b3288.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    box-sizing: border-box;
+}
+
+#roulette-info {
+    font-size: 1.5em;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+#spin-roulette-btn {
+    background: linear-gradient(90deg, #ffcc00, #ff9900); /* Gradient color */
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    border-radius: 25px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Transition for hover effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow for 3D effect */
+    transform: perspective(1px) translateZ(0); /* Create 3D effect */
+}
+
+#spin-roulette-btn:hover {
+    background: linear-gradient(90deg, #ff9900, #ffcc00); /* Inverted gradient on hover */
+    transform: scale(1.05) translateZ(0); /* Increase size and maintain 3D effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Deeper shadow on hover */
+}
+
+#spin-roulette-btn:active {
+    transform: scale(1) translateZ(0); /* Scale down when clicked with 3D effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Slightly less shadow on click */
+}
+
+/* Improvement Button Styles */
+#improvements button {
+    background: linear-gradient(90deg, #ffcc00, #ff9900); /* Gradient color */
+    color: #fff;
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 10px 0;
+    font-size: 1em;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow for 3D effect */
+}
+
+#improvements button:hover {
+    background: linear-gradient(90deg, #ff9900, #ffcc00); /* Inverted gradient on hover */
+    transform: scale(1.05) translateZ(0); /* Slightly increase size with 3D effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Deeper shadow on hover */
+}
+
+#improvements button:active {
+    transform: scale(1) translateZ(0); /* Scale down when clicked with 3D effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Slightly less shadow on click */
+}
+
+#improvement-message {
+    font-size: 1.2em;
+    color: #ba55d3;
+    margin-top: 10px;
+}
+
+/* New Boost Button Styles */
+.boost-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.boost-section button {
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center;
+    padding: 10px 15px;
+    background: linear-gradient(90deg, #ffcc00, #ff9900); /* Gradient color */
+    color: #fff;
+    border: none;
+    border-radius: 25px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Transition for hover effect */
+    width: 250px; /* Width of buttons */
+    margin: 10px 0; /* Spacing between buttons */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow for 3D effect */
+}
+
+.boost-section button i {
+    font-size: 2em; /* Adjust icon size */
+    margin-bottom: 5px; /* Space between icon and text */
+}
+
+.boost-section button:hover {
+    background: linear-gradient(90deg, #ff9900, #ffcc00); /* Inverted gradient on hover */
+    transform: scale(1.05) translateZ(0); /* Slightly increase size with 3D effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Deeper shadow on hover */
+}
+
+.boost-section button:active {
+    transform: scale(1) translateZ(0); /* Scale down when clicked with 3D effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Slightly less shadow on click */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(90deg, #ffcc00, #ff9900); /* Gradient color */
+    padding: 20px;
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow for 3D effect */
+}
+
+form input,
+form button,
+form select,
+form textarea {
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 1em;
+}
+
+form input,
+form select,
+form textarea {
+    background: #fff; /* White background for input fields */
+}
+
+form button {
+    background: linear-gradient(90deg, #ffcc00, #ff9900); /* Gradient color */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Transition for hover effect */
+    border-radius: 25px; /* Rounded corners */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Deeper shadow for 3D effect */
+}
+
+form button:hover {
+    background: linear-gradient(90deg, #ff9900, #ffcc00); /* Inverted gradient on hover */
+    transform: scale(1.05) translateZ(0); /* Slightly increase size with 3D effect */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4); /* Deeper shadow on hover */
+}
+
+form button:active {
+    transform: scale(1) translateZ(0); /* Scale down when clicked with 3D effect */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Slightly less shadow on click */
+}
+
+/* Buttons */
+.button {
+    background: linear-gradient(90deg, #ffcc00, #ff9900); /* Gradient color */
+    color: #fff;
+    border: none;
+    border-radius: 50%; /* Fully rounded corners for circular buttons */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Transition for background, transform, and shadow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px; /* Set width */
+    height: 60px; /* Set height */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* Deeper shadow for 3D effect */
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg); /* 3D perspective */
+    position: relative;
+}
+
+.button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3); /* Inner shadow for 3D effect */
+    z-index: -1;
+    transform: scale(0.9); /* Slightly smaller to create a 3D effect */
+}
+
+.button:hover {
+    background: linear-gradient(90deg, #ff9900, #ffcc00); /* Inverted gradient on hover */
+    transform: scale(1.1); /* Slightly enlarge on hover */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.6); /* Deeper shadow on hover */
+}
+
+.button:active {
+    transform: scale(1.05); /* Slightly reduce size on click */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Slightly less shadow on click */
+}
+
+.button i {
+    font-size: 1.5em; /* Adjust icon size */
+    margin-bottom: 0; /* No margin needed for icon */
+}
+
+.button span {
+    font-size: 0.8em; /* Adjust text size */
+    text-align: center;
+}
+
+/* Оновлені стилі кнопок з внутрішнім контуром, як на кнопках меню */
+button {
+    background: linear-gradient(90deg, #ffcc00, #ff9900); /* Градієнтний фон */
+    color: #fff; /* Колір тексту */
+    border: none;
+    border-radius: 20px; /* Заокруглені кути */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Плавні переходи */
+    display: inline-flex; /* Inline-flex для адаптації по ширині тексту */
+    flex-direction: column; /* Вертикальне розташування елементів */
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px; /* Збільшені відступи для більшого простору навколо тексту */
+    transform: perspective(1000px) rotateX(0deg) rotateY(0deg); /* Перспектива для 3D-ефекту */
+    position: relative; /* Для 3D-тіні */
+    white-space: nowrap; /* Запобігання переносу тексту на новий рядок */
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.6); /* Інтенсивна внутрішня тінь для контуру */
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 4px; /* Зміщення внутрішньої тіні вниз */
+    left: 4px; /* Зміщення внутрішньої тіні вправо */
+    width: calc(100% - 8px); /* Відступи з усіх боків */
+    height: calc(100% - 8px);
+    border-radius: 20px; /* Відповідність заокруглених кутів */
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3); /* Глибша внутрішня тінь для контуру */
+    z-index: -1;
+}
+
+button:hover {
+    background: linear-gradient(90deg, #ff9900, #ffcc00); /* Інвертований градієнт при наведенні */
+    transform: scale(1.05); /* Збільшення розміру при наведенні */
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.7); /* Глибша внутрішня тінь при наведенні */
+}
+
+button:active {
+    transform: scale(1); /* Трохи менше при кліку */
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6); /* Менша внутрішня тінь при кліку */
+}
+
+button i {
+    font-size: 1.5em; /* Розмір іконки */
+    margin-bottom: 0px; /* Відстань між іконкою та текстом */
+}
+
+button span {
+    font-size: 0.9em; /* Трохи більший розмір тексту */
+    text-align: center;
+}
+/* CSS для кольорових букв */
+.letter {
+    display: inline-block;
+    font-size: 0.em;
+    animation: colorChange 5s linear infinite; /* Додаємо анімацію */
+}
+
+/* Анімація для змінення кольору */
+@keyframes colorChange {
+    0% {
+        color: #FF6347; /* Початковий колір */
+    }
+    25% {
+        color: #FF4500; /* Середній колір */
+    }
+    50% {
+        color: #FFD700; /* Середній колір */
+    }
+    75% {
+        color: #32CD32; /* Середній колір */
+    }
+    100% {
+        color: #FF6347; /* Кінцевий колір */
+    }
+}
+
+h1 {
+    color: #ff9900; /* Оранжевий колір тексту */
+    font-size: 2.4em;
+    margin: 0 0 10px 0;
+    text-shadow: 2px 2px 4px #000000, 0 0 0px #ffffff, 0 0 1px #000000 ; /* Біла тінь */
+}
